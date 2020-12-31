@@ -695,15 +695,15 @@ class MIDISounds extends React.Component {
         kind = chord[3];
       }
       if (kind === 1) {
-        this.playStrumDownAt(when, instrument, pitches, duration * N);
+        return this.playStrumDownAt(when, instrument, pitches, duration * N);
       } else {
         if (kind === 2) {
-          this.playStrumUpAt(when, instrument, pitches, duration * N);
+          return this.playStrumUpAt(when, instrument, pitches, duration * N);
         } else {
           if (kind === 3) {
-            this.playSnapAt(when, instrument, pitches, duration * N);
+            return this.playSnapAt(when, instrument, pitches, duration * N);
           } else {
-            this.playChordAt(when, instrument, pitches, duration * N);
+            return this.playChordAt(when, instrument, pitches, duration * N);
           }
         }
       }
@@ -712,7 +712,7 @@ class MIDISounds extends React.Component {
   playChordAt(when, instrument, pitches, duration) {
     var info = this.player.loader.instrumentInfo(instrument);
     if (window[info.variable]) {
-      this.player.queueChord(this.audioContext, this.equalizer.input, window[info.variable], when, pitches, duration, this.volumeInstrumentAdjust(instrument));
+      return this.player.queueChord(this.audioContext, this.equalizer.input, window[info.variable], when, pitches, duration, this.volumeInstrumentAdjust(instrument));
     } else {
       this.cacheInstrument(instrument);
     }
@@ -720,7 +720,7 @@ class MIDISounds extends React.Component {
   playStrumUpAt(when, instrument, pitches, duration) {
     var info = this.player.loader.instrumentInfo(instrument);
     if (window[info.variable]) {
-      this.player.queueStrumUp(this.audioContext, this.equalizer.input, window[info.variable], when, pitches, duration, this.volumeInstrumentAdjust(instrument));
+      return this.player.queueStrumUp(this.audioContext, this.equalizer.input, window[info.variable], when, pitches, duration, this.volumeInstrumentAdjust(instrument));
     } else {
       this.cacheInstrument(instrument);
     }
@@ -736,7 +736,7 @@ class MIDISounds extends React.Component {
   playSnapAt(when, instrument, pitches, duration) {
     var info = this.player.loader.instrumentInfo(instrument);
     if (window[info.variable]) {
-      this.player.queueSnap(this.audioContext, this.equalizer.input, window[info.variable], when, pitches, duration, this.volumeInstrumentAdjust(instrument));
+      return this.player.queueSnap(this.audioContext, this.equalizer.input, window[info.variable], when, pitches, duration, this.volumeInstrumentAdjust(instrument));
     } else {
       this.cacheInstrument(instrument);
     }
